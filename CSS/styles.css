@@ -1,0 +1,39 @@
+header{
+    background-color: rgb(60, 131, 194);
+    height: 3rem;
+    padding-left: 10px;    
+}
+ul{
+    display: flex;
+    justify-content: flex-end;
+    gap: 40px;
+    margin-right: 10px;
+    
+}
+li{
+    margin-top: .5rem;
+    display: flex;
+    font-size: 20px;
+}
+a{
+    text-decoration: none;
+    color: white;
+    margin-left: 10px;
+}
+a:hover{
+    text-decoration:overline;
+    font-weight: bolder;
+}
+footer
+{
+    background-color: rgb(159, 204, 243);
+    text-align: center;
+    bottom: 0px;
+    position: fixed;
+    width: 100%;
+    padding: 5px;
+    
+}
+footer p{
+    font-size: 10px;
+}
