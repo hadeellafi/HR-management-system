@@ -1,5 +1,5 @@
 'use strict'
-let employeeList = [];
+let employeesList = [];
 
 
 function Employee(employee_id, fullName, department, level, image_url) {
@@ -8,24 +8,21 @@ function Employee(employee_id, fullName, department, level, image_url) {
     this.department = department;
     this.level = level;
     this.image_url = image_url;
-    this.salary = this.calculatSalary();
-    this.netSlary = this.calculatNetSalary();
+    this.salary =this.calculatSalary();
+    this.netSlary = this.calculatSalary();
+    employeesList.push(this);
 }
 Employee.prototype.calculatSalary = function () {
-    let min, max;
     if (this.level == "Senior") {
-        min = 1500;
-        max = 2000;
+        this.salary=getRandomInt(1500, 2000);
     }
     else if (this.level == "Mid-Senior") {
-        min = 1000;
-        max = 1500;
+        this.salary=getRandomInt(1000, 1500);
     }
     else {
-        min = 500;
-        max = 1000;
-    }
-    return getRandomInt(min, max);
+        this.salary=getRandomInt(500, 1000);
+    } 
+    return this.salary;
 }
 function getRandomInt(min, max) {
     min = Math.ceil(min);
@@ -40,14 +37,17 @@ Employee.prototype.render = function () {
 }
 function printEmployeeList(arr) {
     for (let i = 0; i < arr.length; i++)
-        employeeList[i].render();
+        arr[i].render();
 }
-employeeList.push(new Employee(1000, "Ghazi Samer", "Administration", "Senior"));
-employeeList.push(new Employee(1001, "Lana Ali", "Finance", "Senior"));
-employeeList.push(new Employee(1002, "Tamara Ayoub", "Marketing", "Senior"));
-employeeList.push(new Employee(1003, "Safi Walid", "Administration", "Mid-Senior"));
-employeeList.push(new Employee(1004, "Omar Zaid", "Development", "Senior"));
-employeeList.push(new Employee(1005, "Rana Saleh", "Development", "Junior"));
-employeeList.push(new Employee(1006, "Hadi Ahmad", "Finance", "Mid-Senior"));
 
-printEmployeeList(employeeList);
+
+
+let employee1=new Employee(1000, "Ghazi Samer", "Administration", "Senior");
+let employee2=new Employee(1001, "Lana Ali", "Finance", "Senior");
+let employee3=new Employee(1002, "Tamara Ayoub", "Marketing", "Senior");
+let employee4=new Employee(1003, "Safi Walid", "Administration", "Mid-Senior");
+let employee5=new Employee(1004, "Omar Zaid", "Development", "Senior");
+let employee6=new Employee(1005, "Rana Saleh", "Development", "Junior");
+let employee7=new Employee(1006, "Hadi Ahmad", "Finance", "Mid-Senior");
+
+printEmployeeList(employeesList);
