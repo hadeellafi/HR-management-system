@@ -1,27 +1,40 @@
 'use strict'
-let employeesList = [];
-
-
-function Employee(employee_id, fullName, department, level, image_url) {
+let allEmployee = [];
+const usedIds = [];
+let form = document.getElementById('employeeInfo');
+form.addEventListener('submit', submitHandler);
+////////////////////constructer///////
+function Employee(employee_id, fullName, department, departmentNum, level, image_url) {
     this.employee_id = employee_id;
     this.fullName = fullName;
     this.department = department;
+    this.departmentNum = departmentNum;
     this.level = level;
-    this.image_url = image_url;
-    this.salary =this.calculatSalary();
-    this.netSlary = this.calculatSalary();
-    employeesList.push(this);
+    this.image_url = `./assets/${image_url}.jpg`;
+    this.salary = 0;
+    this.netSalary = 0;
+    allEmployee.push(this);
 }
+function generateEmployeeId() {
+    while (true) {
+        const newId = Math.floor(Math.random() * 9000) + 1000;
+        if (!usedIds.includes(newId)) {
+            usedIds.push(newId);
+            return newId;
+        }
+    }
+}
+
 Employee.prototype.calculatSalary = function () {
     if (this.level == "Senior") {
-        this.salary=getRandomInt(1500, 2000);
+        this.salary = getRandomInt(1500, 2000);
     }
     else if (this.level == "Mid-Senior") {
-        this.salary=getRandomInt(1000, 1500);
+        this.salary = getRandomInt(1000, 1500);
     }
     else {
-        this.salary=getRandomInt(500, 1000);
-    } 
+        this.salary = getRandomInt(500, 1000);
+    }
     return this.salary;
 }
 function getRandomInt(min, max) {
@@ -30,24 +43,78 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
 }
 Employee.prototype.calculatNetSalary = function () {
-    return this.salary - this.salary * (7.5 / 100);
+    this.netSalary = this.salary - this.salary * (7.5 / 100);
+    return this.netSalary;
 }
 Employee.prototype.render = function () {
-    document.write(this.fullName, "      ", this.salary, "<br>");
+    document.write(this.fullName);
 }
-function printEmployeeList(arr) {
-    for (let i = 0; i < arr.length; i++)
-        arr[i].render();
+////////////////////////////
+const section1El = document.getElementById('dep1');
+section1El.setAttribute('style', 'display:flex;flex-wrap:wrap;justify-content:space-evenly;')
+const section2El = document.getElementById('dep2');
+section2El.setAttribute('style', 'display:flex;flex-wrap:wrap;justify-content:space-evenly;')
+const section3El = document.getElementById('dep3');
+section3El.setAttribute('style', 'display:flex;flex-wrap:wrap;justify-content:space-evenly;')
+const section4El = document.getElementById('dep4');
+section4El.setAttribute('style', 'display:flex;flex-wrap:wrap;justify-content:space-evenly;')
+
+
+function submitHandler(event) {
+    event.preventDefault();
+    let fullName = event.target.fullName.value;
+    let department = event.target.department.value;
+    let departmentNum = generateDepartmentNum(department);
+    let level = event.target.level.value;
+    let img_url = event.target.img_url.value;
+    let id = generateEmployeeId();
+    let employee = new Employee(id, fullName, department, departmentNum, level, img_url);
+    employee.calculatSalary();
+    employee.calculatNetSalary();
+    employee.render();
+}
+function generateDepartmentNum(department) {
+    switch (department) {
+        case "Administration": return 1;
+        case "Marketing": return 2;
+        case "Development": return 3;
+        case "Finance": return 4;
+    }
+}
+Employee.prototype.render = function () {
+    let div1El = document.createElement('div');
+    div1El.setAttribute('style', 'background-color:#F4EEE0;color:#393646;margin:5px;border-radius:40px;text-align:center');
+     //img
+     const imgEl = document.createElement('img');
+     imgEl.src = this.image_url;
+     imgEl.setAttribute('style', 'width:70%;height:170px;margin: 5px auto 0 auto;border-radius:20px;diplay:block');
+     div1El.appendChild(imgEl);
+     //p1
+     const p1El = document.createElement('p');
+     p1El.textContent = `Name:${this.fullName}-ID:${this.employee_id}`;
+     div1El.appendChild(p1El);
+     //p2
+     const p2El = document.createElement('p');
+     p2El.textContent = `Department:${this.department}-Level:${this.level} `;
+     div1El.appendChild(p2El);
+     //p3
+     const p3El = document.createElement('p');
+     p3El.textContent = this.netSalary;
+     p2El.appendChild(p3El);
+     /////div location 
+    if (this.departmentNum == 1) {
+        section1El.appendChild(div1El);
+    }
+    else if (this.departmentNum == 2) {
+        section2El.appendChild(div1El);
+    }
+    else if (this.departmentNum == 3) {
+        section3El.appendChild(div1El);
+    }
+    else {
+        section4El.appendChild(div1El);
+    }
+   
+
 }
 
-
-
-let employee1=new Employee(1000, "Ghazi Samer", "Administration", "Senior");
-let employee2=new Employee(1001, "Lana Ali", "Finance", "Senior");
-let employee3=new Employee(1002, "Tamara Ayoub", "Marketing", "Senior");
-let employee4=new Employee(1003, "Safi Walid", "Administration", "Mid-Senior");
-let employee5=new Employee(1004, "Omar Zaid", "Development", "Senior");
-let employee6=new Employee(1005, "Rana Saleh", "Development", "Junior");
-let employee7=new Employee(1006, "Hadi Ahmad", "Finance", "Mid-Senior");
-
-printEmployeeList(employeesList);

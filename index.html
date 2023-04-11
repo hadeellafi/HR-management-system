@@ -6,8 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/89a14a4c2c.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./CSS/reset.css">
+    <!-- <link rel="stylesheet" href="./CSS/reset.css"> -->
     <link rel="stylesheet" href="./CSS/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@400;700&family=Roboto+Condensed:ital,wght@1,300&display=swap" rel="stylesheet">
     <title>Hr-MANGEMENT system</title>
 </head>
 
@@ -20,19 +23,69 @@
             </ul>
         </nav>
     </header>
-    <main></main>
+
+    <main>
+        <form id="employeeInfo">
+            <fieldset><legend>Employee Information</legend>
+                <div>
+            <label for="fullName">Full Name <br><input  type="text" id="fullName" class="width"></label>
+            </div>
+            <br>
+            <div>
+            <label for="department">Department</label>
+            <br>
+                <select name="department" id="department" class="width">
+                    <option value="Administration">Administration</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Development">Development</option>
+                    <option value="Finance">Finance</option>
+                </select>
+            </div>
+            <div>
+                <label for="level">Level</label>
+                <br>
+                    <select name="level" id="level" class="width">
+                        <option value="Junior">Junior</option>
+                        <option value="Mid-Senior">Mid-Senior</option>
+                        <option value="Senior">Senior</option>
+                    </select>
+                </div>
+                <br>
+                <label for="img_url">Image url<br><input  type="text" id="img_url" name="img_url" class="width"></label>
+                </div>
+                <input type="submit" value="Submit" class="width " id="submit">
+                
+        </fieldset>
+        </form>
+        <hr>
+        <section id="dep1">
+            <h3>Administration</h3>
+        </section>
+        <hr>
+        <section id="dep2">
+            <h3>Marketing</h3>
+        </section>
+        <hr>
+        <section id="dep3">
+            <h3>Development</h3>
+        </section>
+        <hr>
+        <section id="dep4">
+            <h3>Finance</h3>
+        </section>
+
+    </main>
     <footer>
         <section>
             <section>contect us</section>
-            <section>
-                <i class="fa-brands fa-facebook"></i>
-                <i class="fa-solid fa-phone"></i>
-                <i class="fa-brands fa-twitter"></i>
+            <section class="contect_logo">
+                <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.linkedin.com/"><i class="fa-brands fa-linkedin"></i></a>
             </section>
             <p>&copy;Copyright termly 2023</p>
         </section>
     </footer>
-    <script src="./JS/app.js"></script>
+    <script src="./JS/app.js"></script> 
 </body>
 
 </html>
