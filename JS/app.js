@@ -3,6 +3,15 @@ let allEmployee = [];
 const usedIds = [];
 let form = document.getElementById('employeeInfo');
 form.addEventListener('submit', submitHandler);
+
+const section1El = document.getElementById('dep1');
+section1El.setAttribute('style', 'display:flex;flex-wrap:wrap;justify-content:space-evenly;')
+const section2El = document.getElementById('dep2');
+section2El.setAttribute('style', 'display:flex;flex-wrap:wrap;justify-content:space-evenly;')
+const section3El = document.getElementById('dep3');
+section3El.setAttribute('style', 'display:flex;flex-wrap:wrap;justify-content:space-evenly;')
+const section4El = document.getElementById('dep4');
+section4El.setAttribute('style', 'display:flex;flex-wrap:wrap;justify-content:space-evenly;')
 ////////////////////constructer///////
 function Employee(employee_id, fullName, department, departmentNum, level, image_url) {
     this.employee_id = employee_id;
@@ -46,22 +55,19 @@ Employee.prototype.calculatNetSalary = function () {
     this.netSalary = this.salary - this.salary * (7.5 / 100);
     return this.netSalary;
 }
-Employee.prototype.render = function () {
-    document.write(this.fullName);
+
+function generateDepartmentNum(department) {
+    switch (department) {
+        case "Administration": return 1;
+        case "Marketing": return 2;
+        case "Development": return 3;
+        case "Finance": return 4;
+    }
 }
+
 ////////////////////////////
-const section1El = document.getElementById('dep1');
-section1El.setAttribute('style', 'display:flex;flex-wrap:wrap;justify-content:space-evenly;')
-const section2El = document.getElementById('dep2');
-section2El.setAttribute('style', 'display:flex;flex-wrap:wrap;justify-content:space-evenly;')
-const section3El = document.getElementById('dep3');
-section3El.setAttribute('style', 'display:flex;flex-wrap:wrap;justify-content:space-evenly;')
-const section4El = document.getElementById('dep4');
-section4El.setAttribute('style', 'display:flex;flex-wrap:wrap;justify-content:space-evenly;')
-
-
 function submitHandler(event) {
-    event.preventDefault();
+    //event.preventDefault();
     let fullName = event.target.fullName.value;
     let department = event.target.department.value;
     let departmentNum = generateDepartmentNum(department);
@@ -71,50 +77,60 @@ function submitHandler(event) {
     let employee = new Employee(id, fullName, department, departmentNum, level, img_url);
     employee.calculatSalary();
     employee.calculatNetSalary();
-    employee.render();
+    ////step 1
+    let jsonArr = JSON.stringify(allEmployee);
+    localStorage.setItem("allEmployee", jsonArr);
 }
-function generateDepartmentNum(department) {
-    switch (department) {
-        case "Administration": return 1;
-        case "Marketing": return 2;
-        case "Development": return 3;
-        case "Finance": return 4;
-    }
+function getEmployees() {
+    // STEP2: Get the array from the localstorage
+    let jsonArr = localStorage.getItem('allEmployee');
+    let dataFromStorage = JSON.parse(jsonArr);
+    allEmployee = dataFromStorage;
 }
-Employee.prototype.render = function () {
-    let div1El = document.createElement('div');
-    div1El.setAttribute('style', 'background-color:#F4EEE0;color:#393646;margin:5px;border-radius:40px;text-align:center');
-     //img
-     const imgEl = document.createElement('img');
-     imgEl.src = this.image_url;
-     imgEl.setAttribute('style', 'width:70%;height:170px;margin: 5px auto 0 auto;border-radius:20px;diplay:block');
-     div1El.appendChild(imgEl);
-     //p1
-     const p1El = document.createElement('p');
-     p1El.textContent = `Name:${this.fullName}-ID:${this.employee_id}`;
-     div1El.appendChild(p1El);
-     //p2
-     const p2El = document.createElement('p');
-     p2El.textContent = `Department:${this.department}-Level:${this.level} `;
-     div1El.appendChild(p2El);
-     //p3
-     const p3El = document.createElement('p');
-     p3El.textContent = this.netSalary;
-     p2El.appendChild(p3El);
-     /////div location 
-    if (this.departmentNum == 1) {
-        section1El.appendChild(div1El);
-    }
-    else if (this.departmentNum == 2) {
-        section2El.appendChild(div1El);
-    }
-    else if (this.departmentNum == 3) {
-        section3El.appendChild(div1El);
+
+function render(arr) {
+    ///check if arr null
+    if (allEmployee == null) {
+        allEmployee = [];
     }
     else {
-        section4El.appendChild(div1El);
+        for (let i = 0; i < arr.length; i++) {
+            let div1El = document.createElement('div');
+            div1El.setAttribute('style', 'background-color:#F4EEE0;color:#393646;margin:5px;border-radius:40px;text-align:center');
+            //img
+            const imgEl = document.createElement('img');
+            imgEl.src = arr[i].image_url;
+            imgEl.setAttribute('style', 'width:70%;height:170px;margin: 5px auto 0 auto;border-radius:20px;diplay:block');
+            div1El.appendChild(imgEl);
+            //p1
+            const p1El = document.createElement('p');
+            p1El.textContent = `Name:${arr[i].fullName}-ID:${arr[i].employee_id}`;
+            div1El.appendChild(p1El);
+            //p2
+            const p2El = document.createElement('p');
+            p2El.textContent = `Department:${arr[i].department}-Level:${arr[i].level} `;
+            div1El.appendChild(p2El);
+            //p3
+            const p3El = document.createElement('p');
+            p3El.textContent = arr[i].netSalary;
+            p2El.appendChild(p3El);
+            /////div location 
+            if (arr[i].departmentNum == 1) {
+                section1El.appendChild(div1El);
+            }
+            else if (arr[i].departmentNum == 2) {
+                section2El.appendChild(div1El);
+            }
+            else if (arr[i].departmentNum == 3) {
+                section3El.appendChild(div1El);
+            }
+            else {
+                section4El.appendChild(div1El);
+            }
+        }
     }
-   
 
 }
-
+////in space
+getEmployees()
+render(allEmployee)
