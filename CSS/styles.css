@@ -1,90 +1,138 @@
 /* header */
-ul{margin-top: 0;
-padding: 0;}
-body{
+ul {
+    margin-top: 0;
+    padding: 0;
+}
+
+body {
     margin: 0;
     font-family: 'Edu NSW ACT Foundation', cursive;
-font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
 }
-header{
+
+header {
     background-color: #393646;
     height: 3rem;
-    padding-left: 10px;    
+    padding-left: 10px;
 }
-ul{
+
+ul {
     display: flex;
     justify-content: flex-end;
     gap: 40px;
     margin-right: 10px;
-    
+
 }
-li{
+
+li {
     margin-top: .5rem;
     display: flex;
     font-size: 20px;
 }
-ul a{
+
+ul a {
     text-decoration: none;
     color: #F4EEE0;
     margin-left: 10px;
 }
-ul a:hover{
-    text-decoration:overline;
+
+ul a:hover {
+    text-decoration: overline;
     font-weight: bolder;
 }
+
 /* main */
 main {
     width: 100%;
     border-radius: 4px;
     padding: 20px 0;
-    
+
 }
-form{
+
+form {
     width: 30%;
     margin: 0 auto 0 auto;
 }
-form label{
+
+form label {
     font-size: 14px;
-   
+
 }
-.width{
+
+.width {
     width: 90%;
     height: 2rem;
-} 
-input[type="submit"]
-{
+}
+
+input[type="submit"] {
     margin: 10px 0;
 }
-input[type="submit"]:hover{
+
+input[type="submit"]:hover {
     color: #F4EEE0;
     background-color: #6D5D6E;
 }
-hr{
+
+hr {
     color: #884283;
 }
-h3{
-   width:100%;
-   text-align: center;
+
+h3 {
+    width: 100%;
+    text-align: center;
 }
+
 /* footer */
-footer
-{
+footer {
     background-color: #6D5D6E;
     text-align: center;
     bottom: 0px;
     width: 100%;
     padding: 5px;
     color: #F4EEE0;
-    
-    
+
+
 }
-footer p{
+
+footer p {
     font-size: 10px;
 }
-.contect_logo a{
+
+.contect_logo a {
     color: #F4EEE0;
 }
-.contect_logo a:hover{
-color: #884283;
-background-color: #F4EEE0;
+
+.contect_logo a:hover {
+    color: #884283;
+    background-color: #F4EEE0;
 }
+/* account page: */
+table {
+    border: solid #884283 2px;
+    
+    height: 300px;
+    margin: 0 auto 0 auto;
+    text-align: left;
+}
+
+#accFooter {
+    position: fixed;
+}
+
+.tableHeader {
+    padding: 4px 10px;
+    background-color:  #6D5D6E;
+    font-weight: bolder;
+    border: solid #835980;
+    color: #F4EEE0;
+    width: fit-content;
+}
+.tableBody{
+    padding: 4px 10px;
+    border:  solid #884283 1px; 
+    background-color: #f9f4e6;
+}
+.tableFooter{
+    border: solid #884283 2px; 
+    padding: 4px 10px;
+    background-color: #c4abc2;}
